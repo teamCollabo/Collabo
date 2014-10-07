@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Collabo</title>
+<meta charset="utf-8" />
+<script src="jQuery/jquery-latest.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="main.css">
+<script>
+
+$(document).ready(function() {
+
+  $(".loginOverlayLink").click(function(event){
+    event.preventDefault();
+    var action = $(this).attr('data-action');
+    
+    $.get( "ajax/" + action, function( data ) {
+      $( ".login-content" ).html( data );
+    }); 
+    
+    $(".loginOverlay").fadeToggle("slow");   
+  });
+
+  $(".login-close").click(function(){
+      $(".loginOverlay").fadeToggle("slow");
+    });
+	
+  $(".registerOverlayLink").click(function(event){
+    event.preventDefault();
+    var action = $(this).attr('data-action');
+    
+    $.get( "ajax/" + action, function( data ) {
+      $( ".register-content" ).html( data );
+    }); 
+    
+    $(".registerOverlay").fadeToggle("slow");
+  });
+
+  $(".register-close").click(function(){	 
+    $(".registerOverlay").fadeToggle("slow");
+  });
+  
+  $(document).keyup(function(e) {
+    if(e.keyCode == 27 && $(".loginOverlay").css("display") != "none" ) { 
+      event.preventDefault();
+      $(".loginOverlay").fadeToggle("slow");
+    }
+  });
+
+    $(document).keyup(function(e) {
+    if(e.keyCode == 27 && $(".registerOverlay").css("display") != "none" ) { 
+      event.preventDefault();
+      $(".registerOverlay").fadeToggle("slow");
+    }
+  });
+});
+</script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="Centered">
+      <h1>COLLABO</h1>
+      <h6>Online Music Collaboration</h6>
+    </div>
+    <div class="navigation">
+      <span>
+          <a href="login.html" class="loginOverlayLink" data-action="login.html">Log-in</a>
+      </span>
+      <span>
+          <a href="index.html" class="registerOverlayLink" data-action="register.html">Register</a>
+      </span>
+    </div>
+    <div class="loginOverlay" style="display: none;">
+      <div class="login-wrapper">
+        <div class="login-content">
+          <a class="login-close">x</a>
+          <h3>Sign in</h3>
+          <form method="post" action="login.html">
+            <label for="username">
+              Username:
+              <input type="text" name="username" id="username" placeholder="Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{7,20}$" required="required" />
+            </label>
+            <label for="password">
+              Password:
+              <input type="password" name="password" id="password" placeholder="Password must contain 1 uppercase, lowercase and number" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+            </label>
+            <button type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="registerOverlay" style="display: none;">
+      <div class="register-wrapper">
+        <div class="register-content">
+          <a class="register-close">x</a>
+          <h3>Register</h3>
+          <form method="post" action="register.html">
+            <label for="username">
+              Username:
+              <input type="text" name="username" id="username" placeholder="Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{7,20}$" required="required" />
+            </label>
+            <label for="password">
+              Password:
+              <input type="password" name="password" id="password" placeholder="Password must contain 1 uppercase, lowercase and number" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+            </label>
+            <button type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>    
+  </div>
+</body>
+</html></span>
